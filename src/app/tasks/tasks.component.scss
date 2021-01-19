@@ -1,0 +1,14 @@
+@import '../../colors.scss';
+
+:host {
+  flex-grow: 1;
+  height: 100vh;
+}
+
+.tasks {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: $dark-blue;
+  color: $white;
+}

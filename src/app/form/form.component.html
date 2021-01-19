@@ -1,0 +1,34 @@
+<div class="form">
+    <select #days class="form__select-days">
+        <option *ngFor="let number of days_of_month">{{ number }}</option>
+    </select>
+    <select #month name="" id="" class="form__select-dats">
+        <option *ngFor="let number of month_of_years">{{ number }}</option>
+    </select><input #content type="text" name="" id="" class="input form__content-input">
+
+    <div class="form__time">
+        <input type="time" name="" id="" #minTime class="form__time-input">
+        <p>-</p>
+        <input type="time" name="" id="" #maxTime class="form__time-input">
+    </div>
+
+
+
+    <div class="form__days choose">
+        <div class="form__days-item choose__item" (click)="days.value = number + ''"
+            *ngFor="let number of days_of_month">
+            <p>{{ number }}</p>
+        </div>
+    </div>
+
+
+
+    <div class="form__month choose">
+        <div #item class="form__month-item choose__item" (click)="month.value = number + ''"
+            *ngFor="let number of month_of_years">
+            <p>{{ number }}</p>
+        </div>
+    </div>
+
+    <button (click)="emitTask(content.value, days.value, month.value, minTime.value + ' - ' + maxTime.value)"  class="form__button">Wyślij</button>
+</div>

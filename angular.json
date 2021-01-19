@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "time-app"
+  "defaultProject": "time-app",
+  "cli": {
+    "analytics": "5fbed27e-a471-4e75-bc6b-01840ebbf9ad"
+  }
 }

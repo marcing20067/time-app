@@ -1,0 +1,14 @@
+<div class="tasks__box">
+    <h2 class="tasks__box-heading">{{ title }}</h2>
+    <ul class="taskslist">
+        <div *ngFor="let task of tasks | async">
+            <input type="checkbox" name="" id="">
+            <ul>
+                <li>{{ task.content }}</li>
+                <li>{{ task.hour }}</li>
+            </ul>
+
+            <button (click)="(0)" class="edit">Edit</button>
+        </div>
+    </ul>
+</div>
