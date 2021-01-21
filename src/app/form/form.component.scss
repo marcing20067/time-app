@@ -64,7 +64,13 @@
     }
   }
 
+  &__primary {
+    color: $dark-blue;
 
+    &-label {
+      margin-left: 0.5rem;
+    }
+  }
 }
 
 .choose {
@@ -85,3 +91,5 @@
     color: $white;
   }
 }
+
+

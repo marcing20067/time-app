@@ -17,8 +17,26 @@
   ul {
     list-style: none;
   }
+}
 
-  .edit {
+
+
+.task {
+  display: flex;
+  margin: 2rem auto;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__content {
+    margin: 0 1rem;
+  }
+
+  &__hour {
+    width: 100%;
+    text-align: center;
+  }
+
+  &__btn-edit {
     border: none;
     background-color: #fff;
     color: $dark-blue;
