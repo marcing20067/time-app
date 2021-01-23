@@ -1,53 +1,54 @@
-<div class="form">
-    <select #days class="form__select-days">
-        <option *ngFor="let number of days_of_month">{{ number }}</option>
-    </select>
-    <select #month name="" id="" class="form__select-dats">
-        <option *ngFor="let number of month_of_years">{{ number }}</option>
-    </select><input #content type="text" name="" id="" class="input form__content-input">
-
-    <div class="form__time">
-        <input type="time" name="" id="" #minTime class="form__time-input">
-        <p>-</p>
-        <input type="time" name="" id="" #maxTime class="form__time-input">
-    </div>
-
-
-
-    <div class="form__days choose">
-        <div class="form__days-item choose__item" (click)="days.value = number + ''"
-            *ngFor="let number of days_of_month">
-            <p>{{ number }}</p>
-        </div>
-    </div>
-
-
-
-    <div class="form__month choose">
-        <div #item class="form__month-item choose__item" (click)="month.value = number + ''"
-            *ngFor="let number of month_of_years">
-            <p>{{ number }}</p>
-        </div>
-    </div>
+<form class="form" #taskForm="ngForm" (ngSubmit)="send()">
+    <input class="input form__content-input" type="text" id="content" name="content" [(ngModel)]="model.content"
+        required>
 
     <div class="form__primary">
         <p>Wybierz priorytet:</p>
         <div>
-            <input type="radio" id="primary1" id="" name="primary" value="1" (click)="primary = 1">
+            <input type="radio" id="primary1" id="primary1" name="primary_task" value="1"
+                [(ngModel)]="model.primary_task" required>
             <label class="form__primary-label" for="primary1">Choćby skały srały</label>
         </div>
         <div>
-            <input type="radio" id="primary2" id="" name="primary" value="2" (click)="primary = 2">
+            <input type="radio" id="primary2" id="primary2" name="primary_task" value="2"
+                [(ngModel)]="model.primary_task" required>
             <label class="form__primary-label" for="primary2">Średnio ważne</label>
         </div>
         <div>
-            <input type="radio" id="primary3" id="" name="primary" value="3" (click)="primary = 3">
+            <input type="radio" id="primary3" id="primary3" name="primary_task" value="3"
+                [(ngModel)]="model.primary_task" required>
             <label class="form__primary-label" for="primary3">Eeeee tam</label>
         </div>
     </div>
+
+    <div class="form__time">
+        <input type="time" name="minTime" id="" [(ngModel)]="minTime" class="form__time-input" required>
+        <p>-</p>
+        <input type="time" name="maxTime" id="" [(ngModel)]="maxTime" class="form__time-input" required>
+    </div>
+
+    <div class="form__days choose">
+        <div *ngFor="let day_num of days_of_month">
+            <input class="form__days-item choose__item" type="radio" id="{{ 'day_num' + day_num }}" name="day_num" value="{{day_num}}" [(ngModel)]="model.day_num" required>
+            <label for="{{ day_num }}">{{ day_num }}</label>
+        </div>
+    </div>
+
+    <div class="form__month choose">
+        <div *ngFor="let month_num of month_of_years">
+            <input class="form__month-item choose__item" type="radio" id="{{ 'month_num' + month_num }}" name="month_num"
+                value="{{month_num}}" [(ngModel)]="model.month_num" required>
+            <label for="{{ month_num }}">{{ month_num }}</label>
+        </div>
+    </div>
+
+
     <div class="form__year">
         <label for="year">Rok:</label>
-        <input type="number" id="year" min="1000" max="9999" value="2021" #yearInput (keyup)="yearInput.value = yearInput.value.split('').slice(0, 4).join('')">
+        <input type="number" name="year" id="year" min="1000" max="9999" value="2021" #yearInput
+            (keyup)="yearInput.value = yearInput.value.split('').slice(0, 4).join('')" [(ngModel)]="model.year"
+            required>
     </div>
-    <button (click)="emitTask(content.value, days.value, primary, month.value, minTime.value + ' - ' + maxTime.value, yearInput.value)" class="form__button">Wyślij</button>
-</div>
+
+    <button class="form__button" [disabled]="taskForm.invalid" [ngClass]="{'disabled': taskForm.invalid}" type="submit">Wyślij</button>
+</form>

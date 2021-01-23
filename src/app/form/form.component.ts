@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Task } from './../models/task'
 
@@ -9,26 +10,24 @@ import { Task } from './../models/task'
 })
 export class FormComponent {
   @Output()
-  newTask = new EventEmitter<any>()
-  tasks!: Observable<Task[]>
+  newTask = new EventEmitter<Task>();
+  tasks!: Observable<Task[]>;
   primary: any;
   days_of_month: number[] = [...Array(31 + 1).keys()];
   month_of_years: number[] = [...Array(12 + 1).keys()];
+  model: Partial<Task> = {};
+  minTime: string = '';
+  maxTime: string = '';
   constructor() {
-    this.days_of_month.shift()
-    this.month_of_years.shift()
+    this.days_of_month.shift();
+    this.month_of_years.shift();
   }
 
-  emitTask(content: string, days: string, primary: number, month: string, hour: string, year: string): void {
-    const task: Task = {
-      content: content,
-      primary_task: primary,
-      hour: hour,
-      day_num: parseFloat(days),
-      month_num: parseFloat(month),
-      year: parseFloat(year),
-    }
-    this.newTask.emit(task)
+  send(): void {
+    this.model.hour = `${this.minTime} - ${this.maxTime}`;
+    console.log(this.model);
+    console.log(this.model as Task); 
+    this.newTask.emit(this.model as Task);
   }
-
 }
+

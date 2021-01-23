@@ -1,3 +1,4 @@
+import { EventEmitter, Output } from '@angular/core';
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models/task';
@@ -8,9 +9,9 @@ import { Task } from 'src/app/models/task';
   styleUrls: ['./taskbox.component.scss']
 })
 export class TaskboxComponent {
-
   @Input() tasks!: Observable<Task[]>;
   @Input() title!: string;
-  
+  @Output()
+  taskToEdit = new EventEmitter<Task>();
 
 }

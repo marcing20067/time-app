@@ -1,6 +1,7 @@
 <div class="tasks">
-    <app-taskbox [tasks]="primary1Task" title="Choćby skały srały"></app-taskbox>
-    <app-taskbox [tasks]="primary2Task" title="Średnio ważne"></app-taskbox>
-    <app-taskbox [tasks]="primary3Task" title="Eeee tam"></app-taskbox>
+    <app-taskbox (taskToEdit)="editTask.edit($event)" [tasks]="primary1Task" title="Choćby skały srały"></app-taskbox>
+    <app-taskbox (taskToEdit)="editTask.edit($event)" [tasks]="primary2Task" title="Średnio ważne"></app-taskbox>
+    <app-taskbox (taskToEdit)="editTask.edit($event)" [tasks]="primary3Task" title="Eeee tam"></app-taskbox>
     <!-- Edit component -->
 </div>
+<app-task-edit (editedTask)="editTaskssss($event)" #editTask></app-task-edit>

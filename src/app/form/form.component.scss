@@ -45,10 +45,13 @@
     font-weight: 700;
     color: $white;
     cursor: pointer;
+    opacity: 1;
+
+
   }
 
   select {
-    display: none;
+    
   }
 
   &__days-item {
@@ -92,4 +95,7 @@
   }
 }
 
-
+button.disabled {
+  opacity: 0.7;
+  cursor: default;
+}

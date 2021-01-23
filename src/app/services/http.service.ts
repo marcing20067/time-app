@@ -12,18 +12,18 @@ export class HttpService {
   url = 'http://localhost:5000/tasks'
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.url)
+    return this.http.get<Task[]>(this.url).pipe(tap(console.log))
   }
 
   addTask(task: Task):Observable<Task> {
-    return this.http.post<Task>(this.url, task)
+    return this.http.post<Task>(this.url, task).pipe(tap(console.log))
   }
 
   editTask(task: Task):Observable<Task> {
-    return this.http.put<Task>(this.url + '/' + task.id_task, task)
+    return this.http.put<Task>(this.url + '/' + task.id_task, task).pipe(tap(console.log))
   }
 
   deleteTask(task_id: number):Observable<{}> {
-    return this.http.delete<{}>(this.url + '/' + task_id)
+    return this.http.delete<{}>(this.url + '/' + task_id).pipe(tap(console.log))
   }
 }

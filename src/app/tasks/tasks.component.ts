@@ -23,10 +23,14 @@ export class TasksComponent implements OnInit {
   }
   
   addTask(newTask: Task) {
-    this.http.addTask(newTask).subscribe()
+    console.log(newTask);
+    this.http.addTask(newTask).subscribe(
+      result => console.log(result),
+      error => console.log(error)
+    )
   }
 
-  editTask(): void {
-
+  editTaskssss(editedTask: Task): void {
+    this.http.editTask(editedTask).subscribe()
   }
 }
