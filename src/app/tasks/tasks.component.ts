@@ -21,7 +21,7 @@ export class TasksComponent implements OnInit {
     this.primary2Task = this.tasks.pipe(map(mapTasks => mapTasks.filter(item => item.primary_task === 2)))
     this.primary3Task = this.tasks.pipe(map(mapTasks => mapTasks.filter(item => item.primary_task === 3)))
   }
-  
+
   addTask(newTask: Task) {
     console.log(newTask);
     this.http.addTask(newTask).subscribe(

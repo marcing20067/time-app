@@ -8,12 +8,11 @@ import { Subject } from "rxjs"
   styleUrls: ['./task-edit.component.scss']
 })
 export class TaskEditComponent implements OnInit {
-  @Output()
-  editedTask = new EventEmitter<Task>();
+  @Output() editedTask = new EventEmitter<Task>();
   model: Task = {
     content: "",
     primary_task: 0,
-    hour: "00:00 - 00:00",
+    hour: "",
     day_num: 0,
     month_num: 0,
     year: 0
@@ -31,8 +30,8 @@ export class TaskEditComponent implements OnInit {
     this.show = !this.show;
     this.model = task;
   }
-
+  
   emitEditedTask() {
-    this.editedTask.emit(this.model)
+    this.editedTask.emit(this.model as Task)
   }
 }

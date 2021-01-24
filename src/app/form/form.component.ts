@@ -11,7 +11,6 @@ import { Task } from './../models/task'
 export class FormComponent {
   @Output()
   newTask = new EventEmitter<Task>();
-  tasks!: Observable<Task[]>;
   primary: any;
   days_of_month: number[] = [...Array(31 + 1).keys()];
   month_of_years: number[] = [...Array(12 + 1).keys()];

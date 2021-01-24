@@ -76,7 +76,7 @@ def add_task():
 
     return request_data, 201
 
-@app.route('/tasks<id_task>', methods=['PUT'])
+@app.route('/tasks/<id_task>', methods=['PUT'])
 def edit_task(id_task):
     request_data = request.get_json()
     request_data["id_task"] = id_task

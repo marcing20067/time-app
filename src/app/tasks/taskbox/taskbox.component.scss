@@ -5,12 +5,13 @@
     border-left: 1px dashed;
     border-right: 1px dashed;
     height: 100vh;
-
     &-heading {
       text-align: center;
       padding: 1em 0;
       border-bottom: 1px dashed;
     }
+    display: flex;
+    flex-direction: column;
   }
 
 
@@ -44,4 +45,8 @@
     font-size: 1em;
     cursor: pointer;
   }
+}
+
+.taskslist {
+  overflow: auto;
 }

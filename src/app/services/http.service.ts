@@ -20,7 +20,9 @@ export class HttpService {
   }
 
   editTask(task: Task):Observable<Task> {
-    return this.http.put<Task>(this.url + '/' + task.id_task, task).pipe(tap(console.log))
+    const id = task.id_task
+    delete task.id_task
+    return this.http.put<Task>(this.url + '/' + id, task).pipe(tap(console.log))
   }
 
   deleteTask(task_id: number):Observable<{}> {
