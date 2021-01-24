@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { BehaviorSubject } from "rxjs"
+import { Subject } from "rxjs"
 
 @Component({
   selector: 'app-task-edit',
@@ -10,7 +10,14 @@ import { BehaviorSubject } from "rxjs"
 export class TaskEditComponent implements OnInit {
   @Output()
   editedTask = new EventEmitter<Task>();
-  model = new BehaviorSubject<Partial<Task>>({});
+  model: Task = {
+    content: "",
+    primary_task: 0,
+    hour: "00:00 - 00:00",
+    day_num: 0,
+    month_num: 0,
+    year: 0
+  };
   days_of_month: number[] = [...Array(31 + 1).keys()];
   month_of_years: number[] = [...Array(12 + 1).keys()];
   minTime: string = '';
@@ -22,36 +29,10 @@ export class TaskEditComponent implements OnInit {
 
   edit(task: Task): void {
     this.show = !this.show;
-    this.model.next(task)
+    this.model = task;
   }
 
   emitEditedTask() {
-    // let taskToEmit = {}; 
-    // this.model.pipe(model => taskToEmit = model)
-    // this.editedTask.emit(taskToEmit)
+    this.editedTask.emit(this.model)
   }
-  // @Output()
-  // editedTask = new EventEmitter<Task>();
-  // model!: Task;
-  // modelObs = new BehaviorSubject<Partial<Task>>({});
-  // days_of_month: number[] = [...Array(31 + 1).keys()];
-  // month_of_years: number[] = [...Array(12 + 1).keys()];
-  // minTime: string = '';
-  // maxTime: string = '';
-  // show: boolean = false;
-  // constructor() { }
-  // ngOnInit(): void {
-  // }
-
-  // edit(task: Task): void {
-  //   this.show = !this.show;
-  //   this.modelObs.next(task)
-  //   this.modelObs.subscribe(r => this.model = r as Task)
-  // }
-
-  // emitEditedTask() {
-  //   // let taskToEmit = {}; 
-  //   // this.model.pipe(model => taskToEmit = model)
-  //   // this.editedTask.emit(taskToEmit)
-  // }
 }
