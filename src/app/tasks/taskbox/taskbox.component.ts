@@ -13,5 +13,9 @@ export class TaskboxComponent {
   @Input() title!: string;
   @Output()
   taskToEdit = new EventEmitter<Task>();
+  @Output()
+  taskComplete = new EventEmitter<Task>();
+  @Output()
+  taskToDelete = new EventEmitter<number>();
 
 }

@@ -24,7 +24,7 @@ jsonpickle.set_preferred_backend('json')
 jsonpickle.set_encoder_options('json', ensure_ascii=False)
 
 class Task:
-    def __init__(self, id_task, content, primary_task, hour, day_num, month_num, year):
+    def __init__(self, id_task, content, primary_task, hour, day_num, month_num, year, done):
         self.id_task = id_task
         self.content = content
         self.primary_task = primary_task
@@ -32,6 +32,7 @@ class Task:
         self.day_num = day_num
         self.month_num = month_num
         self.year = year
+        self.done = done
 
 
 @app.route('/tasks', methods=['GET'])
@@ -41,11 +42,11 @@ def get_tasks():
     try:
         connection = get_connection_to_database()
         cursor = connection.cursor(dictionary=True)
-        query = "SELECT id_task, content, primary_task, hour, day_num, month_num, year FROM tasks"
+        query = "SELECT id_task, content, primary_task, hour, day_num, month_num, year, done FROM tasks"
         cursor.execute(query)
         
         for row in cursor:
-            tasks.append(Task(row['id_task'], row['content'], row['primary_task'], row['hour'], row['day_num'],row['month_num'], row['year']))
+            tasks.append(Task(row['id_task'], row['content'], row['primary_task'], row['hour'], row['day_num'],row['month_num'], row['year'], row['done']))
             
         return jsonpickle.encode(tasks, unpicklable=False)
 
@@ -64,7 +65,7 @@ def add_task():
     try:
         connection = get_connection_to_database()
         cursor = connection.cursor()
-        query = "INSERT INTO tasks(content, primary_task, hour, day_num, month_num, year) VALUES(%(content)s, %(primary_task)s, %(hour)s, %(day_num)s, %(month_num)s, %(year)s)"
+        query = "INSERT INTO tasks(content, primary_task, hour, day_num, month_num, year, done) VALUES(%(content)s, %(primary_task)s, %(hour)s, %(day_num)s, %(month_num)s, %(year)s, %(done)s)"
         cursor.execute(query, request_data)
         connection.commit()
         
@@ -84,7 +85,7 @@ def edit_task(id_task):
         connection = get_connection_to_database()
         cursor = connection.cursor()
 
-        query = "UPDATE tasks SET content=%(content)s, primary_task=%(primary_task)s, hour=%(hour)s, day_num=%(day_num)s, month_num=%(month_num)s, year=%(year)s WHERE id_task=%(id_task)s"
+        query = "UPDATE tasks SET content=%(content)s, primary_task=%(primary_task)s, hour=%(hour)s, day_num=%(day_num)s, month_num=%(month_num)s, year=%(year)s, done=%(done)s WHERE id_task=%(id_task)s"
         cursor.execute(query, request_data)
         connection.commit()
         

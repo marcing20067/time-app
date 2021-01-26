@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task'
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +12,7 @@ export class HttpService {
   url = 'http://localhost:5000/tasks'
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.url).pipe(tap(console.log))
+    return this.http.get<Task[]>(this.url).pipe(map(tasks => tasks.sort((a, b) => a.done === b.done ? 0 : a.done ? 1 : -1)), tap(console.log))
   }
 
   addTask(task: Task):Observable<Task> {

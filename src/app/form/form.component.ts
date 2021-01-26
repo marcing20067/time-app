@@ -11,18 +11,21 @@ import { Task } from './../models/task'
 export class FormComponent {
   @Output()
   newTask = new EventEmitter<Task>();
-  primary: any;
+
   days_of_month: number[] = [...Array(31 + 1).keys()];
   month_of_years: number[] = [...Array(12 + 1).keys()];
+
   model: Partial<Task> = {};
   minTime: string = '';
   maxTime: string = '';
+
   constructor() {
     this.days_of_month.shift();
     this.month_of_years.shift();
   }
 
   send(): void {
+    this.model.done = false
     this.model.hour = `${this.minTime} - ${this.maxTime}`;
     console.log(this.model);
     console.log(this.model as Task); 

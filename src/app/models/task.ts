@@ -6,4 +6,5 @@ export interface Task {
     day_num: number;
     month_num: number;
     year: number;
+    done: boolean;
 }
