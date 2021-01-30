@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { AbstractFormComponent } from '../abstractform.component';
 import { Task } from './../models/task'
 
 @Component({
@@ -8,28 +8,41 @@ import { Task } from './../models/task'
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent {
+export class FormComponent extends AbstractFormComponent {
   @Output()
   newTask = new EventEmitter<Task>();
-
-  days_of_month: number[] = [...Array(31 + 1).keys()];
-  month_of_years: number[] = [...Array(12 + 1).keys()];
-
   model: Partial<Task> = {};
-  minTime: string = '';
-  maxTime: string = '';
 
-  constructor() {
-    this.days_of_month.shift();
-    this.month_of_years.shift();
+  
+
+  daysInMonth(e: HTMLInputElement, taskForm: NgForm, year: number = new Date().getFullYear()) {
+    setTimeout(() => {
+      const model_num = this.model.month_num as number
+      const days: number = new Date(year, model_num, 0).getDate();
+      this.days_of_month = [...Array(days + 1).keys()];
+      this.days_of_month.shift();
+      e.checked = false
+      if(this.model.day_num) {
+        if(days < this.model.day_num) {
+          this.model.day_num = undefined;
+        }
+      }
+    }, 1)
   }
 
   send(): void {
-    this.model.done = false
+    this.model.done = false;
     this.model.hour = `${this.minTime} - ${this.maxTime}`;
-    console.log(this.model);
-    console.log(this.model as Task); 
     this.newTask.emit(this.model as Task);
+    this.model = {
+      content: "",
+      primary_task: 0,
+      hour: "",
+      day_num: 0,
+      month_num: 0,
+      year: undefined,
+      done: false
+    }
   }
 }
 

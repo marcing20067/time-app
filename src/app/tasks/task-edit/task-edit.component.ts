@@ -1,15 +1,16 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { AbstractFormComponent } from 'src/app/abstractform.component';
 import { Task } from 'src/app/models/task';
-import { Subject } from "rxjs"
 
 @Component({
   selector: 'app-task-edit',
   templateUrl: './task-edit.component.html',
   styleUrls: ['./task-edit.component.scss']
 })
-export class TaskEditComponent implements OnInit {
-
+export class TaskEditComponent extends AbstractFormComponent {
+  
   @Output() editedTask = new EventEmitter<Task>();
+
   model: Task = {
     content: "",
     primary_task: 0,
@@ -19,18 +20,8 @@ export class TaskEditComponent implements OnInit {
     year: 0,
     done: false
   };
-  days_of_month: number[] = [...Array(31 + 1).keys()];
-  month_of_years: number[] = [...Array(12 + 1).keys()];
-  minTime: string = '';
-  maxTime: string = '';
+
   show: boolean = false;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.days_of_month.shift();
-    this.month_of_years.shift();
-  }
 
   edit(task: Task): void {
     this.show = !this.show;
@@ -42,8 +33,9 @@ export class TaskEditComponent implements OnInit {
     (<HTMLInputElement>document.querySelector(`#edit-primary${this.model.primary_task}`)).click();
   }
 
-  emitEditedTask() {
+  emitEditedTask(): void {
     this.model.hour = `${this.minTime} - ${this.maxTime}`
     this.editedTask.emit(this.model as Task)
+    this.show = !this.show;
   }
 }

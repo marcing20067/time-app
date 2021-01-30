@@ -1,62 +1,58 @@
 <div class="componentbox" [ngClass]="{'show': show}">
     <button class="back-btn" (click)="show = !show">Cofnij</button>
 
-    <form class="form" #editForm="ngForm" (ngSubmit)="show = !show; emitEditedTask()">
-        <input class="input form__content-input" type="text" id="edit-content" name="edit-content"
-            [(ngModel)]="model.content" required>
-
+    <form class="form" #editForm="ngForm" (ngSubmit)="emitEditedTask()">
+        <input class="input form__content-input" type="text" id="edit-content" name="edit-content" [(ngModel)]="model.content"
+            required>
+    
         <div class="form__primary">
             <p>Wybierz priorytet:</p>
             <div>
-                <input type="radio" id="edit-primary1" name="edit-primary_task" value="1"
+                <input type="radio" class="form__primary-input" id="edit-primary1" name="edit-primary_task" value="1"
                     [(ngModel)]="model.primary_task" required>
                 <label class="form__primary-label" for="primary1">Bardzo ważne</label>
             </div>
             <div>
-                <input type="radio" id="edit-primary2" name="edit-primary_task" value="2"
+                <input type="radio" class="form__primary-input" id="edit-primary2" name="edit-primary_task" value="2"
                     [(ngModel)]="model.primary_task" required>
                 <label class="form__primary-label" for="primary2">Średnio ważne</label>
             </div>
             <div>
-                <input type="radio" id="edit-primary3" name="edit-primary_task" value="3"
+                <input type="radio" class="form__primary-input" id="edit-primary3" name="edit-primary_task" value="3"
                     [(ngModel)]="model.primary_task" required>
-                <label class="form__primary-label" for="edit-primary3">Mało ważne</label>
+                <label class="form__primary-label" for="primary3">Mało ważne</label>
             </div>
         </div>
-
+    
         <div class="form__time">
-            <input type="time" name="edit-minTime" id="edit-minTime" [(ngModel)]="minTime" class="form__time-input"
-                required>
+            <input type="time" name="edit-minTime" id="edit-minTime" [(ngModel)]="minTime" class="form__time-input" required>
             <p>-</p>
-            <input type="time" name="edit-maxTime" id="edit-maxTime" [(ngModel)]="maxTime" class="form__time-input"
-                required>
+            <input type="time" name="edit-maxTime" id="edit-maxTime" [(ngModel)]="maxTime" class="form__time-input" required>
         </div>
-
+    
         <div class="form__days choose">
-            <div *ngFor="let day_num of days_of_month" class="box">
-                <input class="form__days-item choose__item" type="radio" id="{{ 'edit-day_num' + day_num }}"
-                    name="edit-day_num" value="{{day_num}}" [(ngModel)]="model.day_num" required>
-                <label for="{{ day_num }}">{{ day_num }}</label>
+            <div *ngFor="let day_num of days_of_month" class="form__days-box">
+                <input class="form__days-input choose__item" type="radio" id="{{ 'edit-day_num' + day_num }}" name="edit-day_num" value="{{day_num}}" [(ngModel)]="model.day_num" required>
+                <label for="{{ day_num }}" class="form__days-label">{{ day_num }}</label>
             </div>
         </div>
-
+    
         <div class="form__month choose">
-            <div *ngFor="let month_num of month_of_years" class="box">
-                <input class="form__month-item choose__item" type="radio" id="{{ 'edit-month_num' + month_num }}"
-                    name="edit-month_num" value="{{month_num}}" [(ngModel)]="model.month_num" required>
-                <label for="{{ month_num }}">{{ month_num }}</label>
+            <div *ngFor="let month_num of month_of_years" class="form__month-box">
+                <input class="form__month-input choose__item" type="radio" id="{{ 'edit-month_num' + month_num }}" name="edit-month_num"
+                    value="{{ month_num }}" [(ngModel)]="model.month_num" required>
+                <label for="{{ month_num }}" class="form__month-label">{{ month_num }}</label>
             </div>
         </div>
-
-
+    
+    
         <div class="form__year">
-            <label for="year">Rok:</label>
-            <input type="number" name="edit-year" id="edit-year" min="1000" max="9999" value="2021" #yearInput
+            <label for="year" class="form__year-label">Rok:</label>
+            <input type="number" class="form__year-input" name="edit-year" id="edit-year" min="1000" max="9999" value="2021" #yearInput
                 (keyup)="yearInput.value = yearInput.value.split('').slice(0, 4).join('')" [(ngModel)]="model.year"
                 required>
         </div>
-
-        <button class="form__button" [disabled]="editForm.invalid" [ngClass]="{'disabled': editForm.invalid}"
-            type="submit">Wyślij</button>
+    
+        <button class="form__submit-btn" [disabled]="editForm.invalid" [ngClass]="{'form__submit-btn--disabled': editForm.invalid}" type="submit">Wyślij</button>
     </form>
 </div>

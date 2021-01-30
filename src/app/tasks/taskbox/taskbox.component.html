@@ -1,13 +1,15 @@
 <div class="tasks__box">
     <h2 class="tasks__box-heading">{{ title }}</h2>
-    <ul class="taskslist">
+    <ul class="tasks__list">
         <div *ngFor="let task of tasks | async" class="task" [ngClass]="{'task--done': task.done}">
-            <input (click)="taskComplete.emit(task)" type="checkbox" name="task-done" id="task-done" class="task__checkbox">
+            <input (click)="taskComplete.emit(task)" type="checkbox" name="task-done" id="task-done" class="task__done">
             
             <p class="task__content">{{ task.content }}</p>
-            <button (click)="taskToEdit.emit(task)" class="task__btn-edit">Edytuj</button> 
-            <button (click)="taskToDelete.emit(task.id_task)" class="task__btn-edit">Usuń</button> 
-            <p class="task__hour">{{ task.hour }}</p>
+            <button (click)="taskToEdit.emit(task)" class="task__btn task__btn--edit">Edytuj</button> 
+            <button (click)="taskToDelete.emit(task.id_task)" class="task__btn task__btn--delete">Usuń</button> 
+            <p class="task__date">
+                <span *ngIf="task.day_num < 10">0</span>{{ task.day_num }}.<span *ngIf="task.month_num < 10">0</span>{{ task.month_num }}.{{ task.year }} {{ task.hour }}
+            </p>
         </div>
     </ul>
 </div>

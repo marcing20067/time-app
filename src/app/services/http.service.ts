@@ -25,7 +25,7 @@ export class HttpService {
     return this.http.put<Task>(this.url + '/' + id, task).pipe(tap(console.log))
   }
 
-  deleteTask(task_id: number):Observable<{}> {
+  deleteTask(task_id: number): Observable<{}> {
     return this.http.delete<{}>(this.url + '/' + task_id).pipe(tap(console.log))
   }
 }

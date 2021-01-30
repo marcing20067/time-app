@@ -17,5 +17,4 @@ export class TaskboxComponent {
   taskComplete = new EventEmitter<Task>();
   @Output()
   taskToDelete = new EventEmitter<number>();
-
 }

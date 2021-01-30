@@ -30,16 +30,20 @@
   flex-wrap: wrap;
   justify-content: center;
 
+  &__list {
+    overflow: auto;
+  }
+
   &__content {
     margin: 0 1rem;
   }
 
-  &__hour {
+  &__date {
     width: 100%;
     text-align: center;
   }
 
-  &__btn-edit {
+  &__btn {
     border: none;
     background-color: #fff;
     color: $dark-blue;
@@ -54,7 +58,7 @@
       text-decoration: line-through;
     }
 
-    .task__btn-edit {
+    .task__btn--edit {
       display: none;
     }
 
@@ -62,8 +66,4 @@
       display: none;
     }
   }
-}
-
-.taskslist {
-  overflow: auto;
 }
