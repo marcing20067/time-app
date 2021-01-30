@@ -3,7 +3,7 @@ export interface Task {
     content: string;
     primary_task: number;
     hour: string;
-    day_num: number;
+    day_num: any;
     month_num: number;
     year: number;
     done: boolean;

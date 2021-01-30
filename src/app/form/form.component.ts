@@ -13,19 +13,18 @@ export class FormComponent extends AbstractFormComponent {
   newTask = new EventEmitter<Task>();
   model: Partial<Task> = {};
 
-  
 
-  daysInMonth(e: HTMLInputElement, taskForm: NgForm, year: number = new Date().getFullYear()) {
+
+  daysInMonth(e: HTMLInputElement, year: number = new Date().getFullYear()) {
     setTimeout(() => {
-      const model_num = this.model.month_num as number
+      const model_num = this.model.month_num as number;
       const days: number = new Date(year, model_num, 0).getDate();
       this.days_of_month = [...Array(days + 1).keys()];
       this.days_of_month.shift();
-      e.checked = false
-      if(this.model.day_num) {
-        if(days < this.model.day_num) {
-          this.model.day_num = undefined;
-        }
+      if (days < this.model.day_num) {
+        console.log(this.model.day_num);
+        this.model.day_num = undefined;
+        console.log(this.model.day_num);
       }
     }, 1)
   }
@@ -43,6 +42,17 @@ export class FormComponent extends AbstractFormComponent {
       year: undefined,
       done: false
     }
+    this.minTime = ''
+    this.maxTime = ''
+  }
+
+  getSubmitBoolean(taskForm: NgForm) {
+    let x: Boolean = true
+
+    if (taskForm.invalid === false) {
+      this.model.day_num === undefined ? x = true : x = false
+    }
+    return x
   }
 }
 
