@@ -25,19 +25,27 @@
         <input type="time" name="minTime" id="minTime" [(ngModel)]="minTime" class="form__time-input" required>
         <p>-</p>
         <input type="time" name="maxTime" id="maxTime" [(ngModel)]="maxTime" class="form__time-input" required>
+        
+        <div class="form__time-error" *ngIf="minTime === maxTime && minTime.length === 5 && maxTime.length === 5">
+            <p>Czas nie może być taki sam!</p>
+        </div>
     </div>
+
+
 
     <div class="form__days choose">
         <div *ngFor="let day_num of days_of_month" class="form__days-box">
-            <input class="form__days-input choose__item" type="radio" id="{{ 'day_num' + day_num }}" name="day_num" value="{{day_num}}" [(ngModel)]="model.day_num" required>
+            <input class="form__days-input choose__item" type="radio" id="{{ 'day_num' + day_num }}" name="day_num"
+                value="{{day_num}}" [(ngModel)]="model.day_num" required>
             <label for="{{ day_num }}" class="form__days-label">{{ day_num }}</label>
         </div>
     </div>
 
     <div class="form__month choose">
         <div *ngFor="let month_num of month_of_years" class="form__month-box">
-            <input class="form__month-input choose__item" type="radio" #month id="{{ 'month_num' + month_num }}" name="month_num"
-                value="{{ month_num }}"  [(ngModel)]="model.month_num" (click)="daysInMonth(month)" required>
+            <input class="form__month-input choose__item" type="radio" #month id="{{ 'month_num' + month_num }}"
+                name="month_num" value="{{ month_num }}" [(ngModel)]="model.month_num" (click)="daysInMonth(month)"
+                required>
             <label for="{{ month_num }}" class="form__month-label">{{ month_num }}</label>
         </div>
     </div>
@@ -45,10 +53,11 @@
 
     <div class="form__year">
         <label for="year" class="form__year-label">Rok:</label>
-        <input type="number" class="form__year-input" name="year" id="year" min="1000" max="9999" value="2021" #yearInput
-            (keyup)="yearInput.value = yearInput.value.split('').slice(0, 4).join('')" [(ngModel)]="model.year"
-            required>
+        <input type="number" class="form__year-input" name="year" id="year" min="1000" max="9999" value="2021"
+            #yearInput (keyup)="yearInput.value = yearInput.value.split('').slice(0, 4).join('')"
+            [(ngModel)]="model.year" required>
     </div>
 
-    <button class="form__submit-btn" [disabled]="getSubmitBoolean(taskForm)" [ngClass]="{'form__submit-btn--disabled': getSubmitBoolean(taskForm)}" type="submit">Wyślij</button>
+    <button class="form__submit-btn" [disabled]="getSubmitBoolean(taskForm)"
+        [ngClass]="{'form__submit-btn--disabled': getSubmitBoolean(taskForm)}" type="submit">Wyślij</button>
 </form>

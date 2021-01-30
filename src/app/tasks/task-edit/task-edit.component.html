@@ -39,8 +39,8 @@
     
         <div class="form__month choose">
             <div *ngFor="let month_num of month_of_years" class="form__month-box">
-                <input class="form__month-input choose__item" type="radio" id="{{ 'edit-month_num' + month_num }}" name="edit-month_num"
-                    value="{{ month_num }}" [(ngModel)]="model.month_num" required>
+                <input class="form__month-input choose__item" #month type="radio" id="{{ 'edit-month_num' + month_num }}" name="edit-month_num"
+                    value="{{ month_num }}" [(ngModel)]="model.month_num" (click)="daysInMonth(month)" required>
                 <label for="{{ month_num }}" class="form__month-label">{{ month_num }}</label>
             </div>
         </div>
@@ -53,6 +53,7 @@
                 required>
         </div>
     
-        <button class="form__submit-btn" [disabled]="editForm.invalid" [ngClass]="{'form__submit-btn--disabled': editForm.invalid}" type="submit">Wyślij</button>
+        <button class="form__submit-btn" [disabled]="getSubmitBoolean(editForm)"
+        [ngClass]="{'form__submit-btn--disabled': getSubmitBoolean(editForm)}" type="submit">Wyślij</button>
     </form>
 </div>

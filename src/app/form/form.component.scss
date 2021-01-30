@@ -19,12 +19,23 @@
   &__time {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin-top: 1em;
 
     &-input {
       color: $dark-blue;
       padding: 0 1em;
       border: 1px solid;
+
+      margin-bottom: 1rem;
+    }
+
+    &-error {
+      width: 100%;
+      padding: 1rem 0;
+      background-color: rgb(153, 16, 16);
+      color: $white;
+      text-align: center;
     }
 
   }
@@ -139,4 +150,6 @@
       margin-left: 0.5rem;
     }
   }
+
+
 }
