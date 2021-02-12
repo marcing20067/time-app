@@ -1,7 +1,7 @@
-GET http://localhost:5000/tasks
+GET http://marcing20067.pythonanywhere.com/tasks
 ###
 
-POST http://localhost:5000/tasks
+POST http://marcing20067.pythonanywhere.com/tasks
 Content-Type: application/json
 
 {
@@ -10,7 +10,8 @@ Content-Type: application/json
     "hour": "8:00 - 9:00",
     "day_num": 12, 
     "month_num": 1,
-    "year": 2021
+    "year": 2021,
+    "done": true
 }
 
 ###

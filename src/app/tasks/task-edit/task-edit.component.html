@@ -28,6 +28,9 @@
             <input type="time" name="edit-minTime" id="edit-minTime" [(ngModel)]="minTime" class="form__time-input" required>
             <p>-</p>
             <input type="time" name="edit-maxTime" id="edit-maxTime" [(ngModel)]="maxTime" class="form__time-input" required>
+            <div class="form__time-error" *ngIf="minTime === maxTime && minTime.length === 5 && maxTime.length === 5">
+                <p>Czas nie może być taki sam!</p>
+            </div>
         </div>
     
         <div class="form__days choose">
