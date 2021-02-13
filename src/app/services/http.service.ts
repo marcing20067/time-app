@@ -9,7 +9,7 @@ import { tap, map } from 'rxjs/operators';
 export class HttpService {
   constructor(private http: HttpClient) {}
 
-  url = 'http://marcing20067.pythonanywhere.com/tasks'
+  url = 'https://marcing20067.pythonanywhere.com/tasks'
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.url).pipe(map(tasks => tasks.sort((a, b) => a.done === b.done ? 0 : a.done ? 1 : -1)), tap(console.log))
