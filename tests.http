@@ -1,7 +1,4 @@
-GET http://marcing20067.pythonanywhere.com/tasks
-###
-
-POST http://marcing20067.pythonanywhere.com/tasks
+GET http://localhost:3000/tasks
 Content-Type: application/json
 
 {
@@ -15,11 +12,28 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:5000/tasks/4
+
+
+###
+POST http://localhost:3000/tasks
 Content-Type: application/json
 
 {
-    "content": "Brzdąc sćąśąśżć",
+    "content": "DODANY EZ",
+    "primary_task": 1,
+    "hour": "8:00 - 9:00",
+    "day_num": 12, 
+    "month_num": 1,
+    "year": 2021,
+    "done": true
+}
+
+###
+PUT http://localhost:3000/tasks/602ad3791226f81d2884d224
+Content-Type: application/json
+
+{
+    "content": "zedytowandsdsadsy!",
     "hour": "8:00",
     "primary_task": 1,
     "day_num": 12, 
@@ -28,4 +42,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:5000/tasks/9
+DELETE http://localhost:3000/tasks/602ad952d3199655b86b1ab8
