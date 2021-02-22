@@ -1,5 +1,5 @@
 export interface Task {
-    id_task?: number;
+    _id?: number;
     content: string;
     primary_task: number;
     hour: string;
